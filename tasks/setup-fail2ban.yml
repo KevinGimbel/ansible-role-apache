@@ -1,0 +1,6 @@
+---
+  - name: "[FAIL2BAN] Start"
+    service:
+      name: fail2ban
+      state: started
+    when: apache_install_fail2ban == true

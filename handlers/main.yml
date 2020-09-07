@@ -1,0 +1,12 @@
+---
+# handlers file for .
+- name: "[APACHE] Reload"
+  service:
+    name: apache2
+    state: reloaded
+
+- name: "[FAIL2BAN] Reload"
+  service:
+    name: fail2ban
+    state: reloaded
+  when: apache_install_fail2ban == true

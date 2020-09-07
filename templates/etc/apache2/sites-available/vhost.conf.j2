@@ -1,0 +1,42 @@
+{% if item.use_ssl is defined and item.use_ssl == true %}
+ServerAdmin mailto:{{ item.admin_email }}
+MDCertificateAgreement accepted
+MDomain {{ item.fqdn }}
+
+<VirtualHost *:80>
+	ServerName {{ item.fqdn }}
+	Redirect permanent / https://{{ item.fqdn }}/
+</VirtualHost>
+
+<VirtualHost *:443>
+	ServerName {{ item.fqdn }}
+
+	SSLEngine On
+
+	DocumentRoot "/var/www/html/{{ item.fqdn }}/{{ item.document_root | default('') }}"
+  DirectoryIndex index.php index.htm index.html
+
+  <Directory "/var/www/html/{{ item.fqdn }}/{{ item.document_root | default('') }}">
+      AllowOverride All
+  </Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/{{ item.fqdn }}-error.log
+	CustomLog ${APACHE_LOG_DIR}/{{ item.fqdn }}-access.log combined
+</VirtualHost>
+
+{% else %}
+
+<VirtualHost *:80>
+	ServerName {{ item.fqdn }}
+
+	DocumentRoot "/var/www/html/{{ item.fqdn }}/"
+  DirectoryIndex index.php index.htm index.html
+
+  <Directory "/var/www/html/{{ item.fqdn }}/">
+      AllowOverride All
+  </Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/{{ item.fqdn }}-error.log
+	CustomLog ${APACHE_LOG_DIR}/{{ item.fqdn }}-access.log combined
+</VirtualHost>
+{% endif %}

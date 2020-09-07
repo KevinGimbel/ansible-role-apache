@@ -1,0 +1,16 @@
+---
+  - name: "[APACHE] Setup vhosts"
+    become: true
+    template:
+      src: "{{ item.vhost_config_file | default('etc/apache2/sites-available/vhost.conf.j2') }}"
+      dest: "/etc/apache2/sites-available/{{ item.fqdn }}.conf"
+    with_items: "{{ apache_vhosts }}"
+    notify:
+      - "[APACHE] Reload"
+
+  - name: "[APACHE] Setup document roots"
+    become: true
+    file:
+      path: "/var/www/html/{{ item.fqdn }}/"
+      state: directory
+    with_items: "{{ apache_vhosts }}"

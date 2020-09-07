@@ -1,0 +1,17 @@
+---
+  - name: "[APACHE] Install apache"
+    apt:
+      name: apache2
+      state: present
+
+  - name: "[APACHE] Enable modules"
+    apache2_module:
+      state: present
+      name: "{{ item }}"
+    with_items:
+      - proxy
+      - proxy_http
+      - proxy_http2
+      - rewrite
+      - md
+      - ssl

@@ -1,0 +1,3 @@
+---
+# Enable or disable fail2ban setup
+apache_install_fail2ban: true

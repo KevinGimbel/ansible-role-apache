@@ -1,0 +1,10 @@
+---
+  - name: "[APACHE] Enable vhosts"
+    shell: "a2ensite {{ item.fqdn }}.conf"
+    become: true
+    with_items: "{{ apache_vhosts }}"
+    notify:
+      - "[APACHE] Reload"
+    tags:
+      - reload
+      - update

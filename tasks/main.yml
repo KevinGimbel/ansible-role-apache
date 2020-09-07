@@ -1,0 +1,7 @@
+---
+# tasks file for .
+- import_tasks: install-apache.yml
+- import_tasks: install-fail2ban.yml
+- import_tasks: setup-apache.yml
+- import_tasks: setup-fail2ban.yml
+- import_tasks: manage-apache.yml
