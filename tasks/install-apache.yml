@@ -1,7 +1,12 @@
 ---
-  - name: "[APACHE] Install apache"
+  - name: "[APACHE] Add Repo"
+    apt_repository:
+      repo: "ppa:ondrej/apache2"
+      state: present
+      
+  - name: "[APACHE] Install apache and modules"
     apt:
-      name: apache2
+      name: ['apache2']
       state: present
 
   - name: "[APACHE] Enable modules"
