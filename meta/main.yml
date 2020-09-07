@@ -1,6 +1,6 @@
 galaxy_info:
   author: kevingimbel
-  rolename: apache
+  role_name: apache
   description: Opiniated minimal Apache role
 
   issue_tracker_url: https://github.com/kevingimbel/ansible-role-apache
